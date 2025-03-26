@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sollicitatie Politie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, rgba(0,0,50,1) 10%, rgba(0,0,0,1) 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            opacity: 0.8;
+            animation: twinkle 2s infinite ease-in-out alternate, moveStars linear infinite;
+        }
+        @keyframes twinkle {
+            from { opacity: 0.3; }
+            to { opacity: 1; }
+        }
+        @keyframes moveStars {
+            from { transform: translateY(0); }
+            to { transform: translateY(100vh); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div id="stars" class="stars"></div>
+    </div>
+
+    <div class="container mx-auto p-8 min-h-screen">
+        <h1 class="text-3xl font-bold text-center mb-6">Sollicitatie voor Politie</h1>
+        <form onsubmit="sendToDiscord(event)" class="space-y-4 max-w-2xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+            
+            <h2 class="text-xl font-semibold">Persoonlijke Gegevens</h2>
+            <label class="block">
+                <span class="text-gray-300">IRL Naam</span>
+                <input name="IRL Naam" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Discord Naam</span>
+                <input name="Discord Naam" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">IRL Leeftijd</span>
+                <input name="IRL Leeftijd" type="number" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            
+            <h2 class="text-xl font-semibold">Motivatie</h2>
+            <label class="block">
+                <span class="text-gray-300">Wat is jouw doel binnen de politie? (Minimaal 50 woorden)</span>
+                <textarea name="Doel Politie" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            
+            <h2 class="text-xl font-semibold">Situatievragen</h2>
+            <label class="block">
+                <span class="text-gray-300">Wat zal jij vragen bij een routinecontrole?</span>
+                <textarea name="Routinecontrole" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Wat zal je doen bij een winkeloverval?</span>
+                <textarea name="Winkeloverval" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            
+            <h2 class="text-xl font-semibold">Overige Vragen</h2>
+            <label class="block">
+                <span class="text-gray-300">Hoe vaak zal jij in stad/dienst zijn?</span>
+                <textarea name="Dienst Beschikbaarheid" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Waarom wil je bij de politie werken?</span>
+                <textarea name="Waarom" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Wat weet je al over het politiewerk?</span>
+                <textarea name="Kennis" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Wat zijn je sterke en zwakke punten?</span>
+                <textarea name="Zwakke/goede punten" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Kun je een situatie beschrijven waarin je een conflict hebt opgelost?</span>
+                <textarea name="SituatieConflict" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Hoe zou je reageren op een discriminerende opmerking van een collega?</span>
+                <textarea name="discriminerende Collega" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Hoe overtuig je iemand die niet met je wil meewerken?</span>
+                <textarea name="Overtuig" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Wat doe je als je tijdens een interventie niet weet wat de juiste beslissing is?</span>
+                <textarea name="Beslissing" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="3" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Heb jij nog vragen?</span>
+                <textarea name="Vragen voor ons" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
+            </label>
+
+            
+            <button type="submit" class="bg-green-500 px-6 py-2 rounded w-full hover:bg-green-600 transition">
+                Verzenden
+            </button>
+        </form>
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById("stars");
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement("div");
+                star.classList.add("star");
+                let x = Math.random() * 100;
+                let y = Math.random() * 100;
+                let duration = Math.random() * 4 + 3;
+                let speed = Math.random() * 10 + 5;
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.animationDuration = `${duration}s, ${speed}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Wacht tot de pagina geladen is
+        window.onload = createStars;
+
+        async function sendToDiscord(event) {
+    event.preventDefault();
+    
+    const webhookURL = "https://discord.com/api/webhooks/1350791808459739199/Y6Xkwpr02N-RAk9Wvx4h5zkXNBeM_ThAdv5qbK1hf2CsGX8HMlJuC1oGs5kY_RCZAqs5";
+
+    const formData = new FormData(event.target);
+    let message = "**Nieuwe Politie Sollicitatie**\n";
+
+    // Verzamel ALLE inputvelden, inclusief checkboxes en radiobuttons
+    document.querySelectorAll("input, textarea, select").forEach((element) => {
+        if (element.type === "checkbox" || element.type === "radio") {
+            if (element.checked) {
+                message += `**${element.name}:** ${element.value}\n`;
+            }
+        } else {
+            message += `**${element.name}:** ${element.value}\n`;
+        }
+    });
+
+    await fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: message })
+    });
+
+    alert("✅ Sollicitatie succesvol verzonden!");
+}
+
+
+    </script>
+</body>
+</html>

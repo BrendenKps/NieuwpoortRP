@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FiveM Roleplay Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, rgb(40, 5, 105) 10%, rgba(0,0,0,1) 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            opacity: 0.8;
+            animation: twinkle 2s infinite ease-in-out alternate, moveStars linear infinite;
+        }
+        @keyframes twinkle {
+            from { opacity: 0.3; }
+            to { opacity: 1; }
+        }
+        @keyframes moveStars {
+            from { transform: translateY(0); }
+            to { transform: translateY(100vh); }
+        }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div id="stars" class="stars"></div>
+    </div>
+
+    <div class="container mx-auto p-8 min-h-screen">
+        <h1 class="text-3xl font-bold text-center mb-6">FiveM Roleplay Dashboard</h1>
+        
+        <!-- Dashboard Section -->
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold">Welkom, Speler!</h2>
+            <p>Je bent ingelogd als: Admin</p>
+            <p>Je huidige job: Politieman</p>
+            <p>Huidige rang: Hoofdinspecteur</p>
+        </div>
+        
+        <!-- Ticket System Section -->
+        <div class="mb-8">
+            <button onclick="openTicketModal()" class="bg-blue-500 px-6 py-2 rounded w-full hover:bg-blue-600 transition">
+                Maak een nieuw ticket
+            </button>
+        </div>
+
+        <!-- Ticket List -->
+        <div id="ticket-list">
+            <h3 class="text-xl font-semibold">Tickets:</h3>
+            <ul id="tickets" class="space-y-4">
+                <!-- Dynamically added tickets will appear here -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- Modal for creating a ticket -->
+    <div id="ticketModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeTicketModal()">&times;</span>
+            <h2 class="text-xl font-semibold mb-4">Maak een nieuw ticket</h2>
+            <form id="ticket-form">
+                <label class="block text-gray-300">Betreft:</label>
+                <input type="text" id="ticket-subject" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+
+                <label class="block text-gray-300 mt-4">Beschrijving:</label>
+                <textarea id="ticket-description" rows="4" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required></textarea>
+
+                <button type="submit" class="bg-green-500 px-6 py-2 rounded w-full mt-4 hover:bg-green-600 transition">Verstuur Ticket</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById("stars");
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement("div");
+                star.classList.add("star");
+                let x = Math.random() * 100;
+                let y = Math.random() * 100;
+                let duration = Math.random() * 4 + 3;
+                let speed = Math.random() * 10 + 5;
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.animationDuration = `${duration}s, ${speed}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+
+        // Ticket System Logic
+        const ticketList = document.getElementById("tickets");
+        let tickets = [];
+
+        // Open ticket modal
+        function openTicketModal() {
+            document.getElementById("ticketModal").style.display = "block";
+        }
+
+        // Close ticket modal
+        function closeTicketModal() {
+            document.getElementById("ticketModal").style.display = "none";
+        }
+
+        // Handle ticket form submission
+        document.getElementById("ticket-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const subject = document.getElementById("ticket-subject").value;
+            const description = document.getElementById("ticket-description").value;
+
+            // Add ticket to array
+            const ticket = { subject, description, status: "Open" };
+            tickets.push(ticket);
+
+            // Clear form inputs
+            document.getElementById("ticket-subject").value = '';
+            document.getElementById("ticket-description").value = '';
+
+            // Close modal
+            closeTicketModal();
+
+            // Update ticket list
+            updateTicketList();
+        });
+
+        // Update ticket list
+        function updateTicketList() {
+            ticketList.innerHTML = ''; // Clear current ticket list
+
+            tickets.forEach((ticket, index) => {
+                const ticketItem = document.createElement("li");
+                ticketItem.classList.add("p-4", "bg-gray-800", "rounded", "border", "border-gray-600");
+                ticketItem.innerHTML = `
+                    <h4 class="font-semibold">${ticket.subject}</h4>
+                    <p>${ticket.description}</p>
+                    <p class="mt-2">Status: <span class="text-${ticket.status === 'Open' ? 'red' : 'green'}-500">${ticket.status}</span></p>
+                    <button onclick="closeTicket(${index})" class="mt-2 bg-red-500 px-4 py-1 rounded hover:bg-red-600">Markeer als opgelost</button>
+                `;
+                ticketList.appendChild(ticketItem);
+            });
+        }
+
+        // Close ticket
+        function closeTicket(index) {
+            tickets[index].status = "Opgelost";
+            updateTicketList();
+        }
+    </script>
+</body>
+</html>

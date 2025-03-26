@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solliciteren - FiveM Server</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            color: white;
+            padding: 50px;
+            height: 100%;
+            background: #111;
+            overflow: auto; /* Zorgt ervoor dat je kunt scrollen */
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,0,50,1) 10%, rgba(0,0,0,1) 100%);
+            z-index: -1;
+            overflow: hidden;
+        }
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            opacity: 0.8;
+            animation: twinkle 2s infinite ease-in-out alternate, moveStars linear infinite;
+        }
+        @keyframes twinkle {
+            from { opacity: 0.3; }
+            to { opacity: 1; }
+        }
+        @keyframes moveStars {
+            from { transform: translateY(0); }
+            to { transform: translateY(100vh); }
+        }
+        h1 {
+            font-size: 36px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-size: 28px;
+            margin-top: 40px;
+        }
+        .button-container {
+            margin-top: 50px;
+        }
+        .button {
+            display: inline-block;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            text-decoration: none;
+            font-size: 20px;
+            border-radius: 30px;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            animation: pulse 2s infinite alternate, glowEffect 3s infinite alternate;
+            position: relative;
+            overflow: hidden;
+        }
+        .button::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 10%, transparent 70%);
+            transform: rotate(25deg);
+            transition: opacity 0.3s;
+            opacity: 0;
+        }
+        .button:hover::before {
+            opacity: 1;
+        }
+        .button:hover {
+            background: linear-gradient(45deg, #2575fc, #6a11cb);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+            transform: scale(1.1);
+        }
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+        @keyframes glowEffect {
+            from { box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+            to { box-shadow: 0 0 30px rgba(255, 255, 255, 1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="stars" id="stars"></div>
+    </div>
+
+    <h1>Solliciteer voor een Rol op de Server</h1>
+    <p>Kies een van de onderstaande rollen waar je voor wilt solliciteren:</p>
+
+    <div class="button-container">
+        <a href="politiesoli.html" class="button">Politie</a>
+        <a href="ambusoli.html" class="button">Ambulance</a>
+        <a href="pechhulpsoli.html" class="button">Pechhulp</a>
+        <a href="kmarsoli.html" class="button">KMAR</a>
+        <h2>Buitengame Rollen:</h2>
+        <a href="adminsoli.html" class="button">Admin</a>
+        <a href="development.html" class="button">Development</a>
+        <a href="contentcreator.html" class="button">Content Creator</a>
+        <h2>Buitengame Rollen:</h2>
+        <a href="Event.html" class="button">Event Team</a>
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById("stars");
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement("div");
+                star.classList.add("star");
+                let x = Math.random() * 100;
+                let y = Math.random() * 100;
+                let duration = Math.random() * 4 + 3;
+                let speed = Math.random() * 10 + 5;
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.animationDuration = `${duration}s, ${speed}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+    </script>
+</body>
+</html>

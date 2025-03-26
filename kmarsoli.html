@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sollicitatie Ambulance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, rgb(0, 195, 221) 10%, rgba(0,0,0,1) 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            opacity: 0.8;
+            animation: twinkle 2s infinite ease-in-out alternate, moveStars linear infinite;
+        }
+        @keyframes twinkle {
+            from { opacity: 0.3; }
+            to { opacity: 1; }
+        }
+        @keyframes moveStars {
+            from { transform: translateY(0); }
+            to { transform: translateY(100vh); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div id="stars" class="stars"></div>
+    </div>
+
+    <div class="container mx-auto p-8 min-h-screen">
+        <h1 class="text-3xl font-bold text-center mb-6">Sollicitatie voor Koninklijke Marechaussee</h1>
+        <form onsubmit="sendToDiscord(event)" class="space-y-4 max-w-2xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+            
+            <h2 class="text-xl font-semibold">Persoonlijke Gegevens</h2>
+            <label class="block">
+                <span class="text-gray-300">IRL Naam</span>
+                <input name="IRL Naam" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Discord Naam</span>
+                <input name="Discord Naam" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">IRL Leeftijd</span>
+                <input name="IRL Leeftijd" type="number" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Vertel in minimaal 150 woorden wat over jezelf.</span>
+                <input name="IRL Leeftijd" type="number" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            
+            <h2 class="text-xl font-semibold">Deze job</h2>
+            <label class="block">
+                <span class="text-gray-300">Waarom solliciteer je voor dit beroep? Vertel dit in minimaal 150 woorden</span>
+                <textarea name="waarom" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Heb je eerdere ervaring binnen dit beroep?</span>
+                <textarea name="ervaring" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Wat weet je over dit beroep?</span>
+                <textarea name="Wat weet je" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Noem 3 goede eigenschappen van jezelf</span>
+                <textarea name="goede eigenschappen" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Noem 3 slechte eigenschappen van jezelf</span>
+                <textarea name="Slechte eigenschappen" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Je arriveert bij een patiënt die vermoedelijk onder invloed is en zich agressief gedraagt. Hoe ga je hiermee om?</span>
+                <textarea name="Agressief" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            
+            <h2 class="text-xl font-semibold">Overige Vragen</h2>
+            <label class="block">
+                <span class="text-gray-300">Waarom zouden wij je aan moeten nemen? En niet iemand anders?</span>
+                <textarea name="Waarom jouw" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Heb je de afgelopen 7 dagen een andere overheidsbaan gehad? Zo ja, welke?</span>
+                <textarea name="Afgelopen 7dagen" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Ben je in de afgelopen 7 dagen lid geweest van een criminele organisatie?</span>
+                <textarea name="Afgelopen 7dagen" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Hoe blijf je kalm in een dreigende situatie?</span>
+                <textarea name="Dreigende situatie" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Wat doe je als je tijdens een patrouille plotseling een verdachte situatie tegenkomt?</span>
+                <textarea name="Verdachte" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Heb jij nog vragen?</span>
+                <textarea name="Vragen voor ons" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
+            </label>
+
+            
+            <button type="submit" class="bg-green-500 px-6 py-2 rounded w-full hover:bg-green-600 transition">
+                Verzenden
+            </button>
+        </form>
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById("stars");
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement("div");
+                star.classList.add("star");
+                let x = Math.random() * 100;
+                let y = Math.random() * 100;
+                let duration = Math.random() * 4 + 3;
+                let speed = Math.random() * 10 + 5;
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.animationDuration = `${duration}s, ${speed}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Wacht tot de pagina geladen is
+        window.onload = createStars;
+
+        async function sendToDiscord(event) {
+    event.preventDefault();
+    
+    const webhookURL = "https://discord.com/api/webhooks/1350791814914768977/qwGI8QZsa8G8cc-0zqElRkO7wDW936hAp2Z1NGL3cFfV1ShQT6uAElLbdwxJbWgpGUIv";
+
+    const formData = new FormData(event.target);
+    let message = "**Nieuwe Kmar Sollicitatie**\n";
+
+    // Verzamel ALLE inputvelden, inclusief checkboxes en radiobuttons
+    document.querySelectorAll("input, textarea, select").forEach((element) => {
+        if (element.type === "checkbox" || element.type === "radio") {
+            if (element.checked) {
+                message += `**${element.name}:** ${element.value}\n`;
+            }
+        } else {
+            message += `**${element.name}:** ${element.value}\n`;
+        }
+    });
+
+    await fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: message })
+    });
+
+    alert("✅ Sollicitatie succesvol verzonden!");
+}
+
+
+    </script>
+</body>
+</html>

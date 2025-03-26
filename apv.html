@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algemene Plaatselijke Verordening (APV) - FiveM Server</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: left;
+            margin: 0;
+            color: white;
+            padding: 50px;
+            background: #111;
+            height: 100%;
+            overflow: auto; /* Zorgt ervoor dat je kunt scrollen */
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0,0,50,1) 10%, rgba(0,0,0,1) 100%);
+            z-index: -1;
+            overflow: hidden;
+        }
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            opacity: 0.8;
+            animation: twinkle 2s infinite ease-in-out alternate, moveStars linear infinite;
+        }
+        @keyframes twinkle {
+            from { opacity: 0.3; }
+            to { opacity: 1; }
+        }
+        @keyframes moveStars {
+            from { transform: translateY(0); }
+            to { transform: translateY(100vh); }
+        }
+        h1 {
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-size: 28px;
+            margin-top: 40px;
+        }
+        h3 {
+            font-size: 22px;
+            margin-top: 30px;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="stars" id="stars"></div>
+    </div>
+
+    <div class="container">
+        <h1>Algemene Plaatselijke Verordening (APV)</h1>
+
+        <h2>Artikel 1: Algemeen</h2>
+        <p><strong>Toepasselijkheid:</strong> Deze Algemene Plaatselijke Verordening (APV) is van toepassing op alle spelers die deelnemen aan de server van [Server Naam]. Door de server te betreden, ga je akkoord met de regels en voorwaarden die hieronder worden beschreven.</p>
+
+        <p><strong>Doel:</strong> Het doel van deze APV is om een veilige, plezierige en respectvolle omgeving te waarborgen voor alle spelers op de server.</p>
+
+        <h2>Artikel 2: Gedrag en Respect</h2>
+        <h3>Respect voor andere spelers:</h3>
+        <p>Alle spelers dienen anderen te respecteren, ongeacht hun geslacht, ras, religie, afkomst, seksuele geaardheid of andere persoonlijke kenmerken.</p>
+
+        <h3>Geen discriminatie:</h3>
+        <p>Racisme, seksisme, homofobie, of enige vorm van haatdragend gedrag is strikt verboden en zal leiden tot onmiddellijke sancties.</p>
+
+        <h3>Geen bedreigingen of intimidatie:</h3>
+        <p>Het bedreigen, intimideren of stalken van andere spelers is niet toegestaan.</p>
+
+        <h3>Geen schelden of vulgaire taal:</h3>
+        <p>Het gebruik van ongepaste, beledigende of vulgaire taal is verboden in zowel de chat als de voice chat.</p>
+
+        <h3>Sancties voor overtredingen:</h3>
+        <ul>
+            <li>1ste overtreding: Waarschuwing</li>
+            <li>2de overtreding: Tijdelijke mute (30 minuten)</li>
+            <li>3de overtreding: Tijdelijke ban (1 uur)</li>
+        </ul>
+
+        <h2>Artikel 3: Misbruik van Serverbronnen</h2>
+        <h3>Gebruik van cheats of hacks:</h3>
+        <p>Het gebruik van cheats, hacks, mods of andere methoden die de gameplay beïnvloeden is verboden. Spelers die betrapt worden op het gebruik hiervan kunnen permanent worden gebanned.</p>
+
+        <h3>Exploits en glitches:</h3>
+        <p>Het misbruiken van bugs of glitches om voordelen te behalen wordt beschouwd als exploitatie en is verboden. Spelers moeten bugs of glitches melden aan het serverteam.</p>
+
+        <h3>Onterecht gebruik van adminrechten:</h3>
+        <p>Admins mogen hun macht niet misbruiken voor persoonlijke doeleinden of om een ander speler onterecht te bevoordelen of benadelen.</p>
+
+        <h3>Sancties voor overtredingen:</h3>
+        <ul>
+            <li>2de overtreding: Tijdelijke ban (72 uur)</li>
+            <li>3de overtreding: Permanent ban</li>
+        </ul>
+
+        <h2>Artikel 4: Spelregels</h2>
+        <h3>Geen trolling of griefing:</h3>
+        <p>Spelers mogen geen storende of schadelijke acties ondernemen die het plezier van anderen verstoren, zoals trollen, griefing of het opzettelijk saboteren van activiteiten.</p>
+
+        <h3>Veilig rijden:</h3>
+        <p>Het is verboden om andere spelers opzettelijk aan te rijden, vooral in situaties waar het niet logisch of gerechtvaardigd is in de context van de rol die je speelt.</p>
+
+        <h3>Realistisch gedrag:</h3>
+        <p>Gedraag je op een manier die past bij de setting van het spel en de rol die je speelt. Onrealistisch gedrag of acties die het server-ecosysteem verstoren, worden niet geaccepteerd.</p>
+
+        <h3>Sancties voor overtredingen:</h3>
+        <ul>
+            <li>1ste overtreding: Waarschuwing</li>
+            <li>2de overtreding: Tijdelijke kick (30 minuten)</li>
+            <li>3de overtreding: Tijdelijke ban (1 uur)</li>
+        </ul>
+
+        <h2>Artikel 5: Spelersbeheer en Adminbevoegdheden</h2>
+        <h3>Gebruik van Adminrechten:</h3>
+        <p>Admins moeten hun macht met verantwoordelijkheid gebruiken en mogen niet voor persoonlijke voordelen handelen. Ze mogen geen andere spelers benadelen of bevoordelen zonder gegronde reden.</p>
+
+        <h3>Verantwoordelijkheden van Admins:</h3>
+        <p>Admins moeten zorgen voor een eerlijk en aangenaam speelklimaat en dienen met respect om te gaan met alle spelers, zowel tijdens het handhaven van de regels als in normale interacties.</p>
+
+        <h3>Sancties voor Adminmisbruik:</h3>
+        <ul>
+            <li>1ste overtreding: Waarschuwing</li>
+            <li>2de overtreding: Tijdelijke opschorting van adminrechten (3 dagen)</li>
+            <li>3de overtreding: Verlies van adminrechten (permanent)</li>
+        </ul>
+
+        <h2>Artikel 6: Klachten en Geschillen</h2>
+        <h3>Meldingen van overtredingen:</h3>
+        <p>Spelers die zich benadeeld voelen of getuige zijn van een overtreding kunnen dit melden via [bijvoorbeeld een speciaal formulier, Discord, etc.]. Alle meldingen worden serieus genomen en onderzocht door het serverteam.</p>
+
+        <h3>Geschillen:</h3>
+        <p>In geval van een conflict tussen spelers wordt er eerst geprobeerd om het probleem op te lossen door een bemiddelingsgesprek. Als dit niet lukt, kan het serverteam ingrijpen.</p>
+
+        <h2>Artikel 7: Slotbepalingen</h2>
+        <h3>Wijzigingen in de APV:</h3>
+        <p>Server behoudt zich het recht voor om deze APV op elk moment te wijzigen. Spelers worden op de hoogte gesteld van belangrijke wijzigingen via [bijvoorbeeld een Discord aankondiging].</p>
+
+        <h3>Accepteren van de APV:</h3>
+        <p>Door deel te nemen aan de server, accepteer je deze APV en ga je akkoord met het naleven van de regels en sancties die hierin beschreven staan.</p>
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById("stars");
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement("div");
+                star.classList.add("star");
+                let x = Math.random() * 100;
+                let y = Math.random() * 100;
+                let duration = Math.random() * 4 + 3;
+                let speed = Math.random() * 10 + 5;
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.animationDuration = `${duration}s, ${speed}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+    </script>
+</body>
+</html>

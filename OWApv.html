@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algemene Plaatselijke Verordening (APV) - FiveM Server</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: left;
+            margin: 0;
+            color: white;
+            padding: 50px;
+            background: #111;
+            height: 100%;
+            overflow: auto; /* Zorgt ervoor dat je kunt scrollen */
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgb(46, 0, 0) 10%, rgba(0,0,0,1) 100%);
+            z-index: -1;
+            overflow: hidden;
+        }
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            opacity: 0.8;
+            animation: twinkle 2s infinite ease-in-out alternate, moveStars linear infinite;
+        }
+        @keyframes twinkle {
+            from { opacity: 0.3; }
+            to { opacity: 1; }
+        }
+        @keyframes moveStars {
+            from { transform: translateY(0); }
+            to { transform: translateY(100vh); }
+        }
+        h1 {
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-size: 28px;
+            margin-top: 40px;
+        }
+        h3 {
+            font-size: 22px;
+            margin-top: 30px;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="stars" id="stars"></div>
+    </div>
+
+    <div class="container">
+        <title>Algemene Plaatselijke Verordening (APV) & Gang Rangen</title>
+    </head>
+    <body>
+        <h1>Algemene Plaatselijke Verordening (APV)</h1>
+        <h2>Gangs Rangen</h2>
+        <h3>Gang Structuur</h3>
+        <ul>
+            <h2><strong>Rang 1</strong> | 1/3 leden – Basisrang, toegang tot Discord rollen</h2>
+            <h2><strong>Rang 2</strong> | 3/5 leden – Ingame gang job (zonder extra voordelen)</h2>
+            <h2><strong>Rang 3</strong> | 5/7 leden – Kleine gang, F6 menu, Discord rollen</h2>
+            <h2><strong>Rang 4</strong> | 7/10 leden – Mid-gang, onderwereld spots</h2>
+            <h2><strong>Rang 5</strong> | 15/20 leden – Officiële gang, ganghuis, wapeninkoop</h2>
+            <h2><strong>Rang 6</strong> | 20/25 leden – Extra's zoals auto spawner, sloten</h2>
+            <h2><strong>Rang 7</strong> | 25/35+ leden – Mega gang, uitgebreide voordelen</h2>
+        </ul>
+        
+        <h3>Beloningen voor Gangs</h3>
+        <ul>
+            <h2><strong>Rang 5:</strong> 3x pistols, 1 gratis auto (cardealer/luxery)</h2>
+            <h2><strong>Rang 6:</strong> 2x AK47, 3x pistols, 1 gratis auto (cardealer/luxery)</h2>
+            <h2><strong>Rang 7:</strong> 3x AK47, 5x pistols, 1 gratis auto (donateurs auto)</h2>
+            <h2><strong>Rang 8:</strong> 5x AK47, 9x pistols, 2 gratis auto's (donateurs auto)</h2>
+        </ul>
+    </body>
+    </html>
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById("stars");
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement("div");
+                star.classList.add("star");
+                let x = Math.random() * 100;
+                let y = Math.random() * 100;
+                let duration = Math.random() * 4 + 3;
+                let speed = Math.random() * 10 + 5;
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.animationDuration = `${duration}s, ${speed}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+    </script>
+</body>
+</html>

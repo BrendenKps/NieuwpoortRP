@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registreren</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, rgb(40, 5, 105) 10%, rgba(0,0,0,1) 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            opacity: 0.8;
+            animation: twinkle 2s infinite ease-in-out alternate, moveStars linear infinite;
+        }
+        @keyframes twinkle {
+            from { opacity: 0.3; }
+            to { opacity: 1; }
+        }
+        @keyframes moveStars {
+            from { transform: translateY(0); }
+            to { transform: translateY(100vh); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div id="stars" class="stars"></div>
+    </div>
+
+    <div class="container mx-auto p-8 min-h-screen">
+        <h1 class="text-3xl font-bold text-center mb-6">Registreren</h1>
+        <form onsubmit="registerUser(event)" class="space-y-4 max-w-2xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+            
+            <h2 class="text-xl font-semibold">Persoonlijke Gegevens</h2>
+            <label class="block">
+                <span class="text-gray-300">Naam</span>
+                <input id="naam" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">E-mail</span>
+                <input id="email" type="email" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Wachtwoord</span>
+                <input id="password" type="password" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+                <div class="w-full h-2 bg-gray-600 rounded mt-2 overflow-hidden">
+                    <div id="strength-bar" class="h-full rounded transition-all duration-300"></div>
+                </div>
+            </label>
+            
+            <button type="submit" class="bg-green-500 px-6 py-2 rounded w-full hover:bg-green-600 transition">
+                Maak account
+            </button>
+        </form>
+    </div>
+
+    <script>
+        function checkStrength() {
+            let p = document.getElementById("password").value, s = 0;
+            s += p.length > 5; 
+            s += p.length > 8; 
+            s += /[A-Z]/.test(p);
+            s += /[0-9]/.test(p); 
+            s += /[\W]/.test(p);
+            
+            let colors = ["red", "orange", "yellow", "green", "darkgreen"];
+            let bar = document.getElementById("strength-bar");
+
+            bar.style.backgroundColor = colors[s - 1] || "red";
+            bar.style.width = (s * 20) + "%";
+        }
+
+        // Registratie functie
+        function registerUser(event) {
+            event.preventDefault();
+
+            // Verkrijg formulierwaarden
+            const naam = document.getElementById("naam").value;
+            const email = document.getElementById("email").value;
+            const wachtwoord = document.getElementById("password").value;
+
+            // Bewaar de gegevens in localStorage
+            localStorage.setItem("naam", naam);
+            localStorage.setItem("email", email);
+            localStorage.setItem("wachtwoord", wachtwoord);
+
+            alert("Account succesvol aangemaakt!");
+        }
+
+        function createStars() {
+            const starsContainer = document.getElementById("stars");
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement("div");
+                star.classList.add("star");
+                let x = Math.random() * 100;
+                let y = Math.random() * 100;
+                let duration = Math.random() * 4 + 3;
+                let speed = Math.random() * 10 + 5;
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.animationDuration = `${duration}s, ${speed}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars(); // Roep de functie aan bij het laden van de pagina
+    </script>
+</body>
+</html>

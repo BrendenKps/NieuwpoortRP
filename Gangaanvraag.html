@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sollicitatie Ambulance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, rgb(46, 0, 0) 10%, rgba(0,0,0,1) 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            opacity: 0.8;
+            animation: twinkle 2s infinite ease-in-out alternate, moveStars linear infinite;
+        }
+        @keyframes twinkle {
+            from { opacity: 0.3; }
+            to { opacity: 1; }
+        }
+        @keyframes moveStars {
+            from { transform: translateY(0); }
+            to { transform: translateY(100vh); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div id="stars" class="stars"></div>
+    </div>
+
+    <div class="container mx-auto p-8 min-h-screen">
+        <h1 class="text-3xl font-bold text-center mb-6">Gang Aanvraag</h1>
+        <form onsubmit="sendToDiscord(event)" class="space-y-4 max-w-2xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+            
+            <h2 class="text-xl font-semibold">Persoonlijke Gegevens</h2>
+            <label class="block">
+                <span class="text-gray-300">IRL Naam</span>
+                <input name="IRL Naam" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Discord Naam</span>
+                <input name="Disc Naam" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">IRL Leeftijd</span>
+                <input name="IRL leeftijd" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Vertel in minimaal 150 woorden wat over jezelf.</span>
+                <input name="150woorden" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Waarom wil jij een gang starten?</span>
+                <input name="Waarom" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Waarom verdien jij een gang en niet iemand anders?</span>
+                <input name="waarom verdien" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Ken je de gangregels</span>
+                <input name="gangregels" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Hoeveel leden kan jij leveren in de gang?</span>
+                <input name="leden" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Wat verwacht jij van je gang?</span>
+                <input name="verwacht" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Ga je een donatie huis gebruiken, of een free (rangen) </span>
+                <input name="huise" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+            </label>
+
+            
+
+            
+            <button type="submit" class="bg-green-500 px-6 py-2 rounded w-full hover:bg-green-600 transition">
+                Verzenden
+            </button>
+        </form>
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById("stars");
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement("div");
+                star.classList.add("star");
+                let x = Math.random() * 100;
+                let y = Math.random() * 100;
+                let duration = Math.random() * 4 + 3;
+                let speed = Math.random() * 10 + 5;
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.animationDuration = `${duration}s, ${speed}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Wacht tot de pagina geladen is
+        window.onload = createStars;
+
+        async function sendToDiscord(event) {
+    event.preventDefault();
+    
+    const webhookURL = "https://discord.com/api/webhooks/1350944370974527518/P7-A6GI0r_YkjBOx5oGMjjh-wj0-7cd9nu7T2QzpmDRNTafXiNKNldSDK0jZ3zrlr9j5";
+
+    const formData = new FormData(event.target);
+    let message = "**Nieuwe Kmar Sollicitatie**\n";
+
+    // Verzamel ALLE inputvelden, inclusief checkboxes en radiobuttons
+    document.querySelectorAll("input, textarea, select").forEach((element) => {
+        if (element.type === "checkbox" || element.type === "radio") {
+            if (element.checked) {
+                message += `**${element.name}:** ${element.value}\n`;
+            }
+        } else {
+            message += `**${element.name}:** ${element.value}\n`;
+        }
+    });
+
+    await fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: message })
+    });
+
+    alert("✅ Gangaanvraag succesvol verzonden!");
+}
+
+
+    </script>
+</body>
+</html>
