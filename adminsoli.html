@@ -1,112 +1,184 @@
-<!-- homepage.html -->
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FiveM Server - Home</title>
+    <title>Sollicitatie Ambulance</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, rgb(0, 195, 221) 10%, rgba(0,0,0,1) 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            opacity: 0.8;
+            animation: twinkle 2s infinite ease-in-out alternate, moveStars linear infinite;
+        }
+        @keyframes twinkle {
+            from { opacity: 0.3; }
+            to { opacity: 1; }
+        }
+        @keyframes moveStars {
+            from { transform: translateY(0); }
+            to { transform: translateY(100vh); }
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white">
-    <header class="bg-gray-800 p-6 shadow-lg text-center">
-        <h1 class="text-4xl font-bold">Welkom bij NieuwPoort Roleplay!</h1>
-        <p class="mt-2">Doe mee en ervaar de beste RP-ervaring!</p>
-        <div class="mt-4">
-            <a href="adminsoli.html" class="bg-blue-500 px-4 py-2 rounded">Admin</a>
-            <a href="ambusoli.html" class="bg-blue-500 px-4 py-2 rounded">Ambulance</a>
-            <a href="politiesoli.html" class="bg-blue-500 px-4 py-2 rounded">Politie</a>
-            <a href="pechhulpsoli.html" class="bg-blue-500 px-4 py-2 rounded">Pechhulp</a>
-        </div>
-    </header>
-</body>
-</html>
+<body>
+    <div class="background">
+        <div id="stars" class="stars"></div>
+    </div>
 
-<!-- adminsoli.html -->
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollicitatie Admin</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-900 text-white">
-    <div class="container mx-auto p-8">
-        <h1 class="text-3xl font-bold text-center mb-6">Sollicitatie voor Admin</h1>
-        <form action="#" method="POST" class="space-y-4">
+    <div class="container mx-auto p-8 min-h-screen">
+        <h1 class="text-3xl font-bold text-center mb-6">Sollicitatie voor Nieuwpoort Admin</h1>
+        <form onsubmit="sendToDiscord(event)" class="space-y-4 max-w-2xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+            
             <h2 class="text-xl font-semibold">Persoonlijke Gegevens</h2>
             <label class="block">
-                <span class="text-gray-300">Game/Steam-naam</span>
-                <input type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+                <span class="text-gray-300">IRL Naam</span>
+                <input name="IRL Naam" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
             </label>
             <label class="block">
-                <span class="text-gray-300">Naam</span>
-                <input type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+                <span class="text-gray-300">Discord Naam</span>
+                <input name="Discord Naam" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
             </label>
             <label class="block">
-                <span class="text-gray-300">RP Naam</span>
-                <input type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+                <span class="text-gray-300">IRL Leeftijd</span>
+                <input name="IRL Leeftijd" type="number" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
             </label>
             <label class="block">
-                <span class="text-gray-300">Discord-naam (bijv: Code#0001)</span>
-                <input type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
-            </label>
-            <label class="block">
-                <span class="text-gray-300">Leeftijd</span>
-                <input type="number" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
-            </label>
-            <label class="block">
-                <span class="text-gray-300">Geslacht</span>
-                <select class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white">
-                    <option>Man</option>
-                    <option>Vrouw</option>
-                    <option>Zeg ik liever niet</option>
-                </select>
-            </label>
-            <label class="block">
-                <span class="text-gray-300">Vertel ons iets over jezelf</span>
-                <textarea class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+                <span class="text-gray-300">Vertel in minimaal 150 woorden wat over jezelf.</span>
+                <input name="150 woorden" type="number" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
             </label>
             
-            <h2 class="text-xl font-semibold">Ervaring en Beschikbaarheid</h2>
+            <h2 class="text-xl font-semibold">Deze rang</h2>
             <label class="block">
-                <span class="text-gray-300">Heeft u al ervaring met staff zijn?</span>
-                <textarea class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+                <span class="text-gray-300">Wat motiveert je om admin te worden op onze FiveM-server?</span>
+                <textarea name="motivatie" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
             </label>
             <label class="block">
-                <span class="text-gray-300">Kent u alle regels?</span>
-                <textarea class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+                <span class="text-gray-300">Hoe zou je bijdragen aan een positieve en professionele staff-community?</span>
+                <textarea name="Hoe zou je bijdragen" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
             </label>
             <label class="block">
-                <span class="text-gray-300">Hoeveel uur per week kunt u beschikbaar zijn als junior moderator?</span>
-                <input type="number" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+                <span class="text-gray-300">Heb je ervaring met txAdmin, vMenu, ESX, QBCore of andere frameworks? Zo ja, licht toe.</span>
+                <textarea name="Heb je ervaring met txAdmin" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
             </label>
             <label class="block">
-                <span class="text-gray-300">Hoeveel speeltijd heeft u op de server (in uren)?</span>
-                <input type="number" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+                <span class="text-gray-300">Noem 3 goede eigenschappen van jezelf</span>
+                <textarea name="goede eigenschappen" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Noem 3 slechte eigenschappen van jezelf</span>
+                <textarea name="Slechte eigenschappen" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Een speler klaagt dat hij onterecht is verbannen. Hoe pak je dit aan?</span>
+                <textarea name="onterecht verbannen" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
             </label>
             
-            <h2 class="text-xl font-semibold">Motivatie</h2>
+            <h2 class="text-xl font-semibold">Overige Vragen</h2>
             <label class="block">
-                <span class="text-gray-300">Waarom zouden wij u moeten aannemen en niet een andere persoon?</span>
-                <textarea class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+                <span class="text-gray-300">Je betrapt een medestaff-lid op machtmisbruik (bijv. onterechte bans of favoritisme). Wat doe je?</span>
+                <textarea name="Je betrapt " class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
             </label>
+            <label class="block">
+                <span class="text-gray-300">Hoe ga je om met een cheater, en hoe bepaal je of iemand echt valsspeelt?</span>
+                <textarea name="Hoe ga je" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Hoe ga je om met stressvolle situaties of spelers die je persoonlijk aanvallen?</span>
+                <textarea name="Hoe ga je om met stressvolle situaties" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Wat zijn volgens jou de belangrijkste eigenschappen van een goede FiveM-admin?</span>
+                <textarea name="Wat zijn volgens jou" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Hoe zou je omgaan met conflicten tussen staff-leden?</span>
+                <textarea name="conflicten tussen staff-leden?" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Hoe zorg je ervoor dat je onpartijdig blijft bij het nemen van beslissingen?</span>
+                <textarea name="Hoe zorg je ervoor dat je onpartijdig blijft bij het nemen van beslissingen?" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
+            </label>
+
             
-            <h2 class="text-xl font-semibold">Situatievragen</h2>
-            <label class="block">
-                <span class="text-gray-300">Vraag 1: Een persoon klaagt over VDM, hoe helpt u hem?</span>
-                <textarea class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
-            </label>
-            <label class="block">
-                <span class="text-gray-300">Vraag 2: Iemand is gestorven door RDM, hij vraagt revive en beschrijft de persoon en het voertuig, wat gaat u doen?</span>
-                <textarea class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
-            </label>
-            <label class="block">
-                <span class="text-gray-300">Vraag 3: Een persoon vraagt uw hulp, maar u weet niet hoe u hem kunt helpen, wat gaat u doen?</span>
-                <textarea class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
-            </label>
-            <button type="submit" class="bg-green-500 px-6 py-2 rounded w-full">Verzenden</button>
+            <button type="submit" class="bg-green-500 px-6 py-2 rounded w-full hover:bg-green-600 transition">
+                Verzenden
+            </button>
         </form>
     </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById("stars");
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement("div");
+                star.classList.add("star");
+                let x = Math.random() * 100;
+                let y = Math.random() * 100;
+                let duration = Math.random() * 4 + 3;
+                let speed = Math.random() * 10 + 5;
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.animationDuration = `${duration}s, ${speed}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Wacht tot de pagina geladen is
+        window.onload = createStars;
+
+        async function sendToDiscord(event) {
+    event.preventDefault();
+    
+    const webhookURL = "https://discord.com/api/webhooks/1354591906369376297/rvnPSyNcPrPEZOHaEbrCFlCbCfiHfj_Hh341T7PWFNfL_uVe7E-VBDZoyMeRHilyPFif";
+
+    const formData = new FormData(event.target);
+    let message = "**Nieuwe Admin Sollicitatie**\n";
+
+    // Verzamel ALLE inputvelden, inclusief checkboxes en radiobuttons
+    document.querySelectorAll("input, textarea, select").forEach((element) => {
+        if (element.type === "checkbox" || element.type === "radio") {
+            if (element.checked) {
+                message += `**${element.name}:** ${element.value}\n`;
+            }
+        } else {
+            message += `**${element.name}:** ${element.value}\n`;
+        }
+    });
+
+    await fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: message })
+    });
+
+    alert("✅ Sollicitatie succesvol verzonden!");
+}
+
+
+    </script>
 </body>
 </html>
