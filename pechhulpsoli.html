@@ -1,112 +1,186 @@
-<!-- homepage.html -->
 <!DOCTYPE html>
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FiveM Server - Home</title>
+    <title>Sollicitatie Ambulance</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, rgb(230, 187, 0) 10%, rgba(0,0,0,1) 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            opacity: 0.8;
+            animation: twinkle 2s infinite ease-in-out alternate, moveStars linear infinite;
+        }
+        @keyframes twinkle {
+            from { opacity: 0.3; }
+            to { opacity: 1; }
+        }
+        @keyframes moveStars {
+            from { transform: translateY(0); }
+            to { transform: translateY(100vh); }
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white">
-    <header class="bg-gray-800 p-6 shadow-lg text-center">
-        <h1 class="text-4xl font-bold">Welkom bij NieuwPoort Roleplay!</h1>
-        <p class="mt-2">Doe mee en ervaar de beste RP-ervaring!</p>
-        <div class="mt-4">
-            <a href="adminsoli.html" class="bg-blue-500 px-4 py-2 rounded">Admin</a>
-            <a href="ambusoli.html" class="bg-blue-500 px-4 py-2 rounded">Ambulance</a>
-            <a href="politiesoli.html" class="bg-blue-500 px-4 py-2 rounded">Politie</a>
-            <a href="pechhulpsoli.html" class="bg-blue-500 px-4 py-2 rounded">Pechhulp</a>
-        </div>
-    </header>
-</body>
-</html>
+<body>
+    <div class="background">
+        <div id="stars" class="stars"></div>
+    </div>
 
-<!-- adminsoli.html -->
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollicitatie Admin</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-900 text-white">
-    <div class="container mx-auto p-8">
-        <h1 class="text-3xl font-bold text-center mb-6">Sollicitatie voor Admin</h1>
-        <form action="#" method="POST" class="space-y-4">
+    <div class="container mx-auto p-8 min-h-screen">
+        <h1 class="text-3xl font-bold text-center mb-6">Sollicitatie voor Pechhulp</h1>
+        <form onsubmit="sendToDiscord(event)" class="space-y-4 max-w-2xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+            
             <h2 class="text-xl font-semibold">Persoonlijke Gegevens</h2>
             <label class="block">
-                <span class="text-gray-300">Game/Steam-naam</span>
-                <input type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+                <span class="text-gray-300">IRL Naam</span>
+                <input name="IRL Naam" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
             </label>
             <label class="block">
-                <span class="text-gray-300">Naam</span>
-                <input type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+                <span class="text-gray-300">Discord Naam</span>
+                <input name="Discord Naam" type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
             </label>
             <label class="block">
-                <span class="text-gray-300">RP Naam</span>
-                <input type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
-            </label>
-            <label class="block">
-                <span class="text-gray-300">Discord-naam (bijv: Code#0001)</span>
-                <input type="text" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
-            </label>
-            <label class="block">
-                <span class="text-gray-300">Leeftijd</span>
-                <input type="number" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
-            </label>
-            <label class="block">
-                <span class="text-gray-300">Geslacht</span>
-                <select class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white">
-                    <option>Man</option>
-                    <option>Vrouw</option>
-                    <option>Zeg ik liever niet</option>
-                </select>
-            </label>
-            <label class="block">
-                <span class="text-gray-300">Vertel ons iets over jezelf</span>
-                <textarea class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
-            </label>
-            
-            <h2 class="text-xl font-semibold">Ervaring en Beschikbaarheid</h2>
-            <label class="block">
-                <span class="text-gray-300">Heeft u al ervaring met staff zijn?</span>
-                <textarea class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
-            </label>
-            <label class="block">
-                <span class="text-gray-300">Kent u alle regels?</span>
-                <textarea class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
-            </label>
-            <label class="block">
-                <span class="text-gray-300">Hoeveel uur per week kunt u beschikbaar zijn als junior moderator?</span>
-                <input type="number" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
-            </label>
-            <label class="block">
-                <span class="text-gray-300">Hoeveel speeltijd heeft u op de server (in uren)?</span>
-                <input type="number" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
+                <span class="text-gray-300">IRL Leeftijd</span>
+                <input name="IRL Leeftijd" type="number" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" required>
             </label>
             
             <h2 class="text-xl font-semibold">Motivatie</h2>
             <label class="block">
-                <span class="text-gray-300">Waarom zouden wij u moeten aannemen en niet een andere persoon?</span>
-                <textarea class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+                <span class="text-gray-300">Wat is jouw doel binnen de pechhulp? (Minimaal 50 woorden)</span>
+                <textarea name="Doel Ambulance" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
             </label>
             
             <h2 class="text-xl font-semibold">Situatievragen</h2>
             <label class="block">
-                <span class="text-gray-300">Vraag 1: Een persoon klaagt over VDM, hoe helpt u hem?</span>
-                <textarea class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+                <span class="text-gray-300">De auto moet getakelt worden maar je bent alleen zonder takelwagen, wat doe je?</span>
+                <textarea name="Routinecontrole" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
             </label>
             <label class="block">
-                <span class="text-gray-300">Vraag 2: Iemand is gestorven door RDM, hij vraagt revive en beschrijft de persoon en het voertuig, wat gaat u doen?</span>
-                <textarea class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+                <span class="text-gray-300">Je klant weigert te betalen, wat doe je?</span>
+                <textarea name="Winkeloverval" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
             </label>
             <label class="block">
-                <span class="text-gray-300">Vraag 3: Een persoon vraagt uw hulp, maar u weet niet hoe u hem kunt helpen, wat gaat u doen?</span>
-                <textarea class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+                <span class="text-gray-300">Je klant begint aggresief te doen omdat je de verkeerde kleur hebt op zijn auto gezet, wat doe je?</span>
+                <textarea name="Winkeloverval" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
             </label>
-            <button type="submit" class="bg-green-500 px-6 py-2 rounded w-full">Verzenden</button>
+            
+            <h2 class="text-xl font-semibold">Overige Vragen</h2>
+            <label class="block">
+                <span class="text-gray-300">Hoe vaak zal jij in stad/dienst zijn?</span>
+                <textarea name="Dienst Beschikbaarheid" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Waarom moeten wij jou aannemen en niet iemand anders?</span>
+                <textarea name="Waarom" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Wat betekent professionaliteit voor jou?</span>
+                <textarea name="betekenis professioneliteit" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Hoe zou je jezelf omschrijven in drie woorden?</span>
+                <textarea name="omschrijf jezelf" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Hoe zorg je ervoor dat je zowel fysiek als mentaal fit blijft?</span>
+                <textarea name="hoe mentaal" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Wat doe je als de klant duidelijk een hevige crash heeft gehad?</span>
+                <textarea name="stresvolle" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Wat zou je doen als je wapens in de koffer vindt?</span>
+                <textarea name="weigert" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="4" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Hoe blijf je kalm in noodsituaties?</span>
+                <textarea name="kalm" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="3" required></textarea>
+            </label>
+            <label class="block">
+                <span class="text-gray-300">Heb jij nog vragen?</span>
+                <textarea name="Vragen voor ons" class="block w-full mt-1 p-2 rounded bg-gray-700 border border-gray-600 text-white" rows="2" required></textarea>
+            </label>
+
+            
+            <button type="submit" class="bg-green-500 px-6 py-2 rounded w-full hover:bg-green-600 transition">
+                Verzenden
+            </button>
         </form>
     </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById("stars");
+            for (let i = 0; i < 100; i++) {
+                let star = document.createElement("div");
+                star.classList.add("star");
+                let x = Math.random() * 100;
+                let y = Math.random() * 100;
+                let duration = Math.random() * 4 + 3;
+                let speed = Math.random() * 10 + 5;
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.animationDuration = `${duration}s, ${speed}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Wacht tot de pagina geladen is
+        window.onload = createStars;
+
+        async function sendToDiscord(event) {
+    event.preventDefault();
+    
+    const webhookURL = "https://discord.com/api/webhooks/1350791800683630682/vdZJqoYL1XCm-f_TxcfEIo-ytZwG1-tTYydD92TWkyJWsBfIy7J6vD3waBpKL-7aS0PG";
+
+    const formData = new FormData(event.target);
+    let message = "**Nieuwe Ambulance Sollicitatie**\n";
+
+    // Verzamel ALLE inputvelden, inclusief checkboxes en radiobuttons
+    document.querySelectorAll("input, textarea, select").forEach((element) => {
+        if (element.type === "checkbox" || element.type === "radio") {
+            if (element.checked) {
+                message += `**${element.name}:** ${element.value}\n`;
+            }
+        } else {
+            message += `**${element.name}:** ${element.value}\n`;
+        }
+    });
+
+    await fetch(webhookURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ content: message })
+    });
+
+    alert("✅ Sollicitatie succesvol verzonden!");
+}
+
+
+    </script>
 </body>
 </html>
